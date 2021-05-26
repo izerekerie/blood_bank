@@ -5,8 +5,6 @@ import com.bloodbank.backend.models.Donor;
 import com.bloodbank.backend.repositories.AppointmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import javax.persistence.Entity;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,11 +14,23 @@ import java.util.Optional;
 public class AppointmentController {
     @Autowired
     private AppointmentRepository appointmentRepository;
-     @GetMapping
 
-    public List<Appointment> getAll(){
-         return  appointmentRepository.findAll();
+    @GetMapping
+    public List<Appointment> getAppointments(){
+        return  appointmentRepository.findAll();
      }
+     @GetMapping("/{id}")
+     public Object getOne(@PathVariable Long id){
+         Optional<Appointment> found=appointmentRepository.findById(id);
+         if(found.isEmpty()) return  "Appointment  does not exist in our system";
+         return found.get();
+     }
+//     @GetMapping("/{hospitalID}")
+//     public Object getbyHospital(@PathVariable("hospitalId") Long id){
+//         Optional<Appointment> found=appointmentRepository.findById(id);
+//         if(found.isEmpty()) return  "Appointment  does not exist in our system";
+//         return found.get();
+//     }
 
      @PostMapping
     public Appointment createOne(@RequestBody Appointment newAppoi){
@@ -30,7 +40,7 @@ public class AppointmentController {
      @DeleteMapping("/{id}")
      public String deleteOne(@PathVariable Long id){
          Optional<Appointment> found=appointmentRepository.findById(id);
-         if(found.isEmpty()) return  "donors does not exist in our system";
+         if(found.isEmpty()) return  "Appointments does not exist in our system";
          appointmentRepository.deleteById(id);
          return  "Appointment deleted successfully";
      }

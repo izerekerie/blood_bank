@@ -6,13 +6,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.awt.*;
 import java.util.Date;
 
 @Entity
 public class Appointment {
 
-    public Appointment(Long id, String address, String title, Long hospitalId, String date) {
+    public Appointment(Long id, String address, String title, Long hospitalId, Date date) {
         this.id = id;
         this.address = address;
         this.title = title;
@@ -48,11 +47,11 @@ public class Appointment {
         this.hospitalId = hospitalId;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
@@ -62,7 +61,7 @@ public class Appointment {
     private  String address,title;
     private  Long hospitalId;
     @JsonFormat(pattern="yyyy-MM-dd",shape = JsonFormat.Shape.STRING)
-    private String  date;
+    private Date  date;
 
     public void setId(Long id) {
         this.id = id;
