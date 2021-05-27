@@ -14,31 +14,40 @@ import java.util.Optional;
 
 @RestController
 
+@RequestMapping("api/hospital")
 
 public class HospitalController {
 
     @Autowired
   private HospitalRepository hospitalRepository;
-    @PostMapping("/hospital")
+    @PostMapping
     public Hospital addHospital(@RequestBody Hospital hospital){
         return hospitalRepository.save(hospital);
     }
 
 
-    @GetMapping("/bloodbank/hospital/{id}")
+    @GetMapping("/{id}")
     public Hospital getHospitalById(@PathVariable Long id){
         return hospitalRepository.findById(id)
                 .orElseThrow(()->new HttpClientErrorException(HttpStatus.NOT_FOUND));
     }
 
 
-    @GetMapping("/bloodbank/hospital")
+    @GetMapping("by_district/{district}")
+    public List<Donor> getByDistrict(@PathVariable String district){
+        return donorRepository.findDonorsByDistrict(district);
+
+
+    }
+
+
+    @GetMapping
     public List<Hospital> getALlHospitals(){
         return hospitalRepository.findAll();
     }
 
 
-    @PutMapping("/bloodbank/hospital/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Hospital> updateHospitalById(@PathVariable Long id, @RequestBody Hospital hospital){
         Optional<Hospital> HospitalData = hospitalRepository.findById(id);
 
@@ -62,7 +71,7 @@ public class HospitalController {
     }
 
 
-    @DeleteMapping("/bloodbank/hospital/{id}")
+    @DeleteMapping("/{id}")
     public void deleteHospitalById(@PathVariable Long id) {
         hospitalRepository.deleteById(id);
     }

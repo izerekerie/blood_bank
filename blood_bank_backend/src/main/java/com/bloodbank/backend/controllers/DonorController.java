@@ -52,6 +52,7 @@ public class DonorController {
         donorRepository.deleteAll();
     }
     @DeleteMapping("/{id}")
+
   public String deleteOne(@PathVariable Long id){
         Optional<Donor> found=donorRepository.findById(id);
         if(found.isEmpty()) return  "donors does not exist in our system";
