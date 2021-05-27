@@ -3,6 +3,7 @@ package com.bloodbank.backend.models;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table
@@ -52,6 +53,12 @@ public class Hospital {
 
     @NotNull
     private String description;
+
+    @ManyToMany
+    List<Appointment> appointments;
+    public Hospital() {
+
+    }
 
 
     public Long getId() {

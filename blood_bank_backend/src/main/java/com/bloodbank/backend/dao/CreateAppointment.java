@@ -1,43 +1,24 @@
-package com.bloodbank.backend.models;
+package com.bloodbank.backend.dao;
 
+import com.bloodbank.backend.models.Hospital;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import javax.persistence.*;
 import java.sql.Timestamp;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 
-@Entity
-public class Appointment {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    private  String address,title;
-
-    @ManyToOne
-    private  Hospital hospital;
-
+public class CreateAppointment {
+    private  String title,address;
+    private IdTemplate hospital;
     private Timestamp date;
 
-    public Appointment(String address, String title, Hospital hospital, Timestamp date) {
-        this.address = address;
+    public CreateAppointment(String title, String address, IdTemplate hospital, Timestamp date) {
         this.title = title;
+        this.address = address;
         this.hospital = hospital;
         this.date = date;
     }
 
-    public Appointment() {
-
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public CreateAppointment() {
     }
 
     public String getAddress() {
@@ -56,11 +37,11 @@ public class Appointment {
         this.title = title;
     }
 
-    public Hospital getHospital() {
+    public IdTemplate getHospital() {
         return hospital;
     }
 
-    public void setHospital(Hospital hospital) {
+    public void setHospital(IdTemplate hospital) {
         this.hospital = hospital;
     }
 

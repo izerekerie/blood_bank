@@ -17,7 +17,6 @@ import java.util.Optional;
 @RequestMapping("api/hospital")
 
 public class HospitalController {
-
     @Autowired
   private HospitalRepository hospitalRepository;
     @PostMapping
@@ -33,12 +32,6 @@ public class HospitalController {
     }
 
 
-    @GetMapping("by_district/{district}")
-    public List<Donor> getByDistrict(@PathVariable String district){
-        return donorRepository.findDonorsByDistrict(district);
-
-
-    }
 
 
     @GetMapping
