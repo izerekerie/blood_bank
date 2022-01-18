@@ -9,6 +9,9 @@ import java.util.List;
 @Table
 
 public class Hospital {
+
+    public Hospital (){}
+
     public Hospital (String name,String email,String password,String district,String sector,String description){
         this.name=name;
         this.email=email;
@@ -56,9 +59,6 @@ public class Hospital {
 
     @ManyToMany
     List<Appointment> appointments;
-    public Hospital() {
-
-    }
 
 
     public Long getId() {
